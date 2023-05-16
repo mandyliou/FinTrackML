@@ -24,7 +24,7 @@ import {
 const Row1 = () => {
   const { palette } = useTheme();
   const { data } = useGetKpisQuery(); //used to make api calls
-  console.log("data:", data)
+  // console.log("data:", data)
 
   //data name = revenue
   const revenue = useMemo(() => {
@@ -38,7 +38,7 @@ const Row1 = () => {
       })
     );
   }, [data]); // only run when data changes
-  
+
   const revenueExpenses = useMemo(() => {
     return (
       data &&

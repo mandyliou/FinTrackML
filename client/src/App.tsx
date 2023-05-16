@@ -18,7 +18,7 @@ function App() {
           <Navbar />
           <Routes>
             <Route path="/" element={<Dashboard />} />
-            {/* <Route path="/predictions" element={<Predictions />} /> */}
+            <Route path="/predictions" element={<Predictions />} />
           </Routes>
         </Box>
       </ThemeProvider>

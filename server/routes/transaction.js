@@ -7,7 +7,7 @@ router.get("/transactions", async (req, res) => {
   try {
     const transactions = await Transaction.find()
       .limit(50)
-      .sort({ createdOn: -1 });
+      .sort({ createdOn: -1 }); //sort by the least
 
     res.status(200).json(transactions);
   } catch (error) {
