@@ -49,6 +49,7 @@ COPY <<-"EOF" /app/package.json
 EOF
 
 RUN npm install --legacy-peer-deps
+RUN npm install mongoose-currency --force
 
 # Copy application code
 COPY --link . .

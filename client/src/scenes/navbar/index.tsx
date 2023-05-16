@@ -15,7 +15,7 @@ const Navbar = (props: Props) => {
             <FlexBetween gap="0.75rem">
                 {/* material UI icon */}
                 <AccountBalanceIcon sx={{ fontSize: "28px" }} />
-                <Typography variant="h4" fontSize="16px"> Finanseer </Typography>
+                <Typography variant="h4" fontSize="16px"> Financial Tracker Pro </Typography>
             </FlexBetween>
 
             {/* Right SIDE */}

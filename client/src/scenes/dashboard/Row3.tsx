@@ -1,22 +1,26 @@
-import BoxHeader from '@/components/BoxHeader';
-import DashboardBox from '@/components/DashboardBox';
-import { useGetKpisQuery, useGetProductsQuery, useGetTransactionsQuery } from '@/state/api';
+import BoxHeader from "@/components/BoxHeader";
+import DashboardBox from "@/components/DashboardBox";
 import FlexBetween from "@/components/FlexBetween";
-import { Box, useTheme, Typography } from '@mui/material';
-import { DataGrid, GridCellParams } from '@mui/x-data-grid';
+import {
+  useGetKpisQuery,
+  useGetProductsQuery,
+  useGetTransactionsQuery,
+} from "@/state/api";
+import { Box, Typography, useTheme } from "@mui/material";
+import { DataGrid, GridCellParams } from "@mui/x-data-grid";
 import React, { useMemo } from "react";
 import { Cell, Pie, PieChart } from "recharts";
 
 const Row3 = () => {
   const { palette } = useTheme();
   const pieColors = [palette.primary[800], palette.primary[500]];
+
   const { data: kpiData } = useGetKpisQuery();
   const { data: productData } = useGetProductsQuery();
   const { data: transactionData } = useGetTransactionsQuery();
-  // console.log("transactionData:", transactionData);
 
   const pieChartData = useMemo(() => {
-    if (kpiData) { // if KPI data exist....
+    if (kpiData) {
       const totalExpenses = kpiData[0].totalExpenses;
       return Object.entries(kpiData[0].expensesByCategory).map(
         ([key, value]) => {
@@ -33,15 +37,13 @@ const Row3 = () => {
         }
       );
     }
-  }, [kpiData]); //only want top part to happen if kpiData changes
+  }, [kpiData]);
 
-
-  //an array of objects of each column
   const productColumns = [
     {
-      field: "_id", //where data property's from
-      headerName: "id", //name of column
-      flex: 1, //the space it takes
+      field: "_id",
+      headerName: "id",
+      flex: 1,
     },
     {
       field: "expense",
@@ -85,17 +87,17 @@ const Row3 = () => {
 
   return (
     <>
-        <DashboardBox  gridArea="g">
-          <BoxHeader
-            title="List of Products"
-            sideText={'${productData?.length} products'}
-          />
-          <Box
+      <DashboardBox gridArea="g">
+        <BoxHeader
+          title="List of Products"
+          sideText={`${productData?.length} products`}
+        />
+        <Box
           mt="0.5rem"
           p="0 0.5rem"
           height="75%"
           sx={{
-            "& .MuiDataGrid-root": { //change entire DB; targets class within child comp
+            "& .MuiDataGrid-root": {
               color: palette.grey[300],
               border: "none",
             },
@@ -109,55 +111,53 @@ const Row3 = () => {
               visibility: "hidden",
             },
           }}
-          >
-          {/* create columns by using props */}
-          {/* for rows, if data doesn't exist, return empty array */}
-            <DataGrid
+        >
+          <DataGrid
             columnHeaderHeight={25}
             rowHeight={35}
             hideFooter={true}
             rows={productData || []}
             columns={productColumns}
-            />
-          </Box>
-          </DashboardBox>
-          <DashboardBox gridArea="h">
-          <BoxHeader
-            title="Recent Orders"
-            sideText={`${transactionData?.length} latest transactions`}
           />
-          <Box
-            mt="1rem"
-            p="0 0.5rem"
-            height="80%"
-            sx={{
-              "& .MuiDataGrid-root": {
-                color: palette.grey[300],
-                border: "none",
-              },
-              "& .MuiDataGrid-cell": {
-                borderBottom: `1px solid ${palette.grey[800]} !important`,
-              },
-              "& .MuiDataGrid-columnHeaders": {
-                borderBottom: `1px solid ${palette.grey[800]} !important`,
-              },
-              "& .MuiDataGrid-columnSeparator": {
-                visibility: "hidden",
-              },
-            }}
-          >
-            <DataGrid
-              columnHeaderHeight={25}
-              rowHeight={35}
-              hideFooter={true}
-              rows={transactionData || []}
-              columns={transactionColumns}
-            />
-          </Box>
+        </Box>
+      </DashboardBox>
+      <DashboardBox gridArea="h">
+        <BoxHeader
+          title="Recent Orders"
+          sideText={`${transactionData?.length} latest transactions`}
+        />
+        <Box
+          mt="1rem"
+          p="0 0.5rem"
+          height="80%"
+          sx={{
+            "& .MuiDataGrid-root": {
+              color: palette.grey[300],
+              border: "none",
+            },
+            "& .MuiDataGrid-cell": {
+              borderBottom: `1px solid ${palette.grey[800]} !important`,
+            },
+            "& .MuiDataGrid-columnHeaders": {
+              borderBottom: `1px solid ${palette.grey[800]} !important`,
+            },
+            "& .MuiDataGrid-columnSeparator": {
+              visibility: "hidden",
+            },
+          }}
+        >
+          <DataGrid
+            columnHeaderHeight={25}
+            rowHeight={35}
+            hideFooter={true}
+            rows={transactionData || []}
+            columns={transactionColumns}
+          />
+        </Box>
       </DashboardBox>
       <DashboardBox gridArea="i">
-        <BoxHeader title="Expense Breakdown By Category" sideText="+4%" />
-        <FlexBetween mt="0.5rem" gap="0.5rem" p="0 1rem" textAlign="center">
+        <BoxHeader title="Expense Breakdown By Category"  sideText="+4%" />
+        <FlexBetween mt="-0.1rem" gap="0.5rem" p="0 1rem" textAlign="center">
           {pieChartData?.map((data, i) => (
             <Box key={`${data[0].name}-${i}`}>
               <PieChart width={110} height={100}>
@@ -174,7 +174,7 @@ const Row3 = () => {
                   ))}
                 </Pie>
               </PieChart>
-              <Typography variant="h5">{data[0].name}</Typography>
+              <Typography variant="h5" style={{ marginTop: "-.6rem" }}>{data[0].name}</Typography>
             </Box>
           ))}
         </FlexBetween>
@@ -205,7 +205,7 @@ const Row3 = () => {
         </Typography>
       </DashboardBox>
     </>
-    )
-}
+  );
+};
 
 export default Row3;
