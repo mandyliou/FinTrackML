@@ -49,8 +49,8 @@ Install dependencies: `cd FinTrackML` and `npm install`
 
 Set up the MongoDB database and update the configuration files with your database credentials.
 
-Start the server: `cd server` and `npm start`
+Start the server: `cd server` and `npm run dev`
 
-Start the client: `cd client` and `npm start`
+Start the client: `cd client` and `npm run dev`
 
 Open your browser and visit: http://localhost:5173 to access FinTrackML.
