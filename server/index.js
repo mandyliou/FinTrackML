@@ -1,10 +1,10 @@
-import express from "express";
-import bodyParser from "body-parser";
-import mongoose from "mongoose";
-import cors from "cors";
-import dotenv from "dotenv";
-import helmet from "helmet";
-import morgan from "morgan";
+import express from "express"; // web app framework
+import bodyParser from "body-parser"; // middleware to parse incoming request
+import mongoose from "mongoose"; //Object Data Modeling (ODM) lib for MongoDB
+import cors from "cors"; //Middleware to handle Cross-Origin Resource Sharing
+import dotenv from "dotenv"; // manage env. variables
+import helmet from "helmet"; // security headers
+import morgan from "morgan"; // logging
 import kpiRoutes from "./routes/kpi.js";
 import productRoutes from "./routes/product.js";
 import transactionRoutes from "./routes/transaction.js";
@@ -13,7 +13,7 @@ import Product from "./models/Product.js";
 import Transaction from "./models/Transaction.js";
 import { kpis, products, transactions } from "./data/data.js";
 
-/* CONFIGURATIONS */
+/* CONFIGURATIONS env, middlewares, and routes*/
 dotenv.config();
 const app = express();
 app.use(express.json());
@@ -48,5 +48,3 @@ mongoose
     // Transaction.insertMany(transactions);
   })
   .catch((error) => console.log(`${error} did not connect`));
-
-  
